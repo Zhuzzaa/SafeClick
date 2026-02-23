@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> Phishing Prevention Extension</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <h1>
+        <img src="icons/icon16.png" class="logo" alt="Logo">
+        Safe Click - Phishing Prevention
+    </h1>
+
+    <div class="tabs">
+        <div class="tab active" data-tab="current">Current Site</div>
+        <div class="tab" data-tab="check">Check URL</div>
+        <div class="tab" data-tab="history">History</div>
+        <div class="tab" data-tab="settings">Settings</div>
+    </div>
+
+    <div id="current-tab" class="tab-content active">
+        <div id="current-status" class="result">
+            <p>Analyzing current site...</p>
+        </div>
+        <div id="current-details" class="details"></div>
+    </div>
+
+    <div id="check-tab" class="tab-content">
+        <div class="url-check">
+            <input type="text" id="url-input" placeholder="Enter URL to check">
+            <button id="check-button">Check URL</button>
+        </div>
+
+        <div id="check-result" class="result">
+            <div id="result-text">Enter a URL to analyze.</div>
+            <div id="check-details" class="details"></div>
+        </div>
+    </div>
+
+    <div id="history-tab" class="tab-content">
+        <h3 class="section-title">Recently Analyzed URLs</h3>
+        <div id="history-list" class="history">
+            <p>Loading history...</p>
+        </div>
+        <button id="clear-history">Clear History</button>
+    </div>
+
+    <div id="settings-tab" class="tab-content">
+        <div class="settings-header">
+            <h3 class="section-title">Protection Settings</h3>
+            <button id="open-options" title="Open advanced options">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4285f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 5 15.4a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 8a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 8 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 16 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 8c.14.31.22.65.22 1v.09A1.65 1.65 0 0 0 21 12c0 .35-.08.69-.22 1z"/></svg>
+            </button>
+        </div>
+        <label>
+            <input type="checkbox" id="enable-protection" checked>
+            Enable phishing protection
+        </label>
+        <label>
+            <input type="checkbox" id="show-warnings" checked>
+            Show warning banners
+        </label>
+        <label>
+            <input type="checkbox" id="block-high-risk" checked>
+            Automatically block high-risk sites
+        </label>
+        <button id="save-settings">Save Settings</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

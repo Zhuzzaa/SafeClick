@@ -1,0 +1,200 @@
+/* Base styles */
+body {
+    width: 400px;
+    padding: 16px;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #333;
+}
+
+h1 {
+    font-size: 18px;
+    margin: 0 0 16px 0;
+    color: #1a73e8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo {
+    width: 24px;
+    height: 24px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tab {
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+    font-size: 14px;
+    color: #5f6368;
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    background-color: #f1f3f4;
+}
+
+.tab.active {
+    color: #1a73e8;
+    border-bottom: 2px solid #1a73e8;
+    background-color: #e8f0fe;
+}
+
+/* Tab content */
+.tab-content {
+    display: none;
+    padding: 8px 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* URL Check */
+.url-check {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+#url-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #1557b0;
+}
+
+/* Results */
+.result {
+    margin: 16px 0;
+    padding: 12px;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.details {
+    margin-top: 12px;
+}
+
+/* Analysis sections */
+.analysis-section {
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    font-weight: 600;
+    color: #202124;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.verdict {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.risk-score-label {
+    font-size: 13px;
+    color: #5f6368;
+    margin-bottom: 4px;
+}
+
+.risk-score-bar {
+    width: 100%;
+    background: #eee;
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+/* History */
+.history {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.history-item {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 13px;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+/* Status colors */
+.status-safe {
+    color: #0f9d58;
+}
+
+.status-warning {
+    color: #f4b400;
+}
+
+.status-danger {
+    color: #db4437;
+}
+
+/* Settings */
+label {
+    display: block;
+    margin: 12px 0;
+    font-size: 14px;
+    color: #202124;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Settings button */
+#open-options {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+#open-options:hover {
+    background: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+    body {
+        width: 100%;
+        box-sizing: border-box;
+    }
+} 
