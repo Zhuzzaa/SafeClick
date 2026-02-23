@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> Phishing Prevention Extension</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <h1>
+        <img src="icons/icon16.png" class="logo" alt="Logo">
+        Safe Click - Phishing Prevention
+    </h1>
+
+    <div class="tabs">
+        <div class="tab active" data-tab="current">Current Site</div>
+        <div class="tab" data-tab="check">Check URL</div>
+        <div class="tab" data-tab="history">History</div>
+        <div class="tab" data-tab="activation">Activation</div>
+        <div class="tab" data-tab="settings">Settings</div>
+    </div>
+
+    <div id="current-tab" class="tab-content active">
+        <div id="current-status" class="result">
+            <p>Analyzing current site...</p>
+        </div>
+        <div id="current-details" class="details"></div>
+    </div>
+
+    <div id="check-tab" class="tab-content">
+        <div class="url-check">
+            <input type="text" id="url-input" placeholder="Enter URL to check">
+            <button id="check-button">Check URL</button>
+        </div>
+
+        <div id="check-result" class="result">
+            <div id="result-text">Enter a URL to analyze.</div>
+            <div id="check-details" class="details"></div>
+        </div>
+    </div>
+
+    <div id="history-tab" class="tab-content">
+        <h3 class="section-title">Recently Analyzed URLs</h3>
+        <div id="history-list" class="history">
+            <p>Loading history...</p>
+        </div>
+        <button id="clear-history">Clear History</button>
+    </div>
+
+    <div id="activation-tab" class="tab-content">
+        <div class="activation-header">
+            <h3 class="section-title">API Keys Activation</h3>
+            <p style="font-size: 12px; color: #9da5b4; margin-bottom: 16px;">
+                Enter your API keys to remove rate limits and use your own quotas. Leave empty to use default keys (limited).
+            </p>
+        </div>
+        
+        <div class="api-key-section">
+            <label for="gsb-api-key" class="api-label">
+                <span>Google Safe Browsing API Key</span>
+                <a href="https://console.cloud.google.com/apis/credentials" target="_blank" style="font-size: 11px; color: #6c8dff; text-decoration: none; margin-left: 8px;">Get key →</a>
+            </label>
+            <div class="api-input-wrapper">
+                <input type="password" id="gsb-api-key" class="api-input" placeholder="Enter your Google Safe Browsing API key">
+                <button type="button" class="toggle-visibility" data-target="gsb-api-key" title="Show/Hide API key">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+            </div>
+            <div class="api-status" id="gsb-status"></div>
+            <button type="button" class="validate-key-btn" data-service="gsb" data-key-input="gsb-api-key">Validate Key</button>
+        </div>
+
+        <div class="api-key-section">
+            <label for="vt-api-key" class="api-label">
+                <span>VirusTotal API Key</span>
+                <a href="https://www.virustotal.com/gui/join-us" target="_blank" style="font-size: 11px; color: #6c8dff; text-decoration: none; margin-left: 8px;">Get key →</a>
+            </label>
+            <div class="api-input-wrapper">
+                <input type="password" id="vt-api-key" class="api-input" placeholder="Enter your VirusTotal API key">
+                <button type="button" class="toggle-visibility" data-target="vt-api-key" title="Show/Hide API key">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+            </div>
+            <div class="api-status" id="vt-status"></div>
+            <button type="button" class="validate-key-btn" data-service="vt" data-key-input="vt-api-key">Validate Key</button>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 20px;">
+            <button id="save-api-keys" style="flex: 1;">Save API Keys</button>
+            <button id="reset-api-keys" style="background: rgba(255,255,255,0.1); flex: 0 0 auto;">Reset</button>
+        </div>
+
+        <div id="api-save-message" style="margin-top: 12px; font-size: 12px; color: #34a853; display: none;"></div>
+    </div>
+
+    <div id="settings-tab" class="tab-content">
+        <div class="settings-header">
+            <h3 class="section-title">Protection Settings</h3>
+            <button id="open-options" title="Open advanced options">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4285f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 5 15.4a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 8a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 8 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 16 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 8c.14.31.22.65.22 1v.09A1.65 1.65 0 0 0 21 12c0 .35-.08.69-.22 1z"/></svg>
+            </button>
+        </div>
+        <label>
+            <input type="checkbox" id="enable-protection" checked>
+            Enable phishing protection
+        </label>
+        <label>
+            <input type="checkbox" id="show-warnings" checked>
+            Show warning banners
+        </label>
+        <label>
+            <input type="checkbox" id="block-high-risk" checked>
+            Automatically block high-risk sites
+        </label>
+        <button id="save-settings">Save Settings</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
